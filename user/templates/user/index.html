@@ -1,0 +1,30 @@
+{% extends 'user/base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+<h1 class="alert alert-danger">Главная страница</h1>
+<div class="alert alert-warning">
+    <form method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form }}
+        </table>
+        <input class="btn btn-danger" type="submit" value="Send">
+    </form>
+    {% if user_date %}
+        {% for el in user_date %}
+            <div class="alert alert-warning">
+                <h3>{{ el.first_name }}</h3>
+                <h3>{{ el.last_name }}</h3>
+                <p>{{ el.email }}</p>
+                <p>{{ el.age }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Заполните форму</p>
+    {% endif%}
+</div>
+{% endblock %}
